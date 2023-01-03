@@ -1,0 +1,158 @@
+use escola;
+
+db.aluno.insertMany([{
+    "_id": 1,
+    "nome": "nick",
+    "apelido": "correia",
+    "data_nascimento": new Date("1991-04-01"),
+    "morada": "Av da avo",
+    "email": "asd",
+    "telemovel": 154863324,
+    "curso_id": 1
+},
+{
+    "_id": 2,
+    "nome": "gajo",
+    "apelido": "coiso",
+    "data_nascimento": new Date("1990-06-11"),
+    "morada": "wertwef",
+    "email": "werwerwer",
+    "telemovel": 453435478,
+    "curso_id": 2
+},
+{
+    "_id": 3,
+    "nome": "gaja",
+    "apelido": "coisa",
+    "data_nascimento": new Date("1996-03-21"),
+    "morada": "rua da coisa",
+    "email": "aaaah",
+    "telemovel": 248655478,
+    "curso_id": 2
+},
+{
+    "_id": 4,
+    "nome": "isto",
+    "apelido": "aquilo",
+    "data_nascimento": new Date("2000-01-22"),
+    "morada": "qqqqqq",
+    "email": "wwwwww",
+    "telemovel": 412145687,
+    "curso_id": 3
+},
+{
+    "_id": 5,
+    "nome": "aquele",
+    "apelido": "ali",
+    "data_nascimento": new Date("2001-11-30"),
+    "morada": "eeeee",
+    "email": "rrrrrr",
+    "telemovel": 456786754,
+    "curso_id": 4
+}]);
+
+
+
+db.disciplina.insertMany([
+{
+    "_id": 1,
+    "nome": "bue especial",
+    "credito": 6,
+    "idioma": "FR",
+    "curso_id": 4
+},
+{
+    "_id": 2,
+    "nome": "portugues",
+    "credito": 2,
+    "idioma": "PT",
+    "curso_id": 3
+},
+{
+    "_id": 3,
+    "nome": "brasileiro",
+    "credito": 2,
+    "idioma": "PT",
+    "curso_id": 2
+},
+{
+    "_id": 4,
+    "nome": "angolano",
+    "credito": 3,
+    "idioma": "PT",
+    "curso_id": 4
+},
+{
+    "_id": 5,
+    "nome": "brit",
+    "credito": 1,
+    "idioma": "EN",
+    "curso_id": 5
+}]
+)
+
+
+
+db.curso.insertMany([
+{
+    "_id": 1,
+    "nome": "especial",
+    "departamento": "mui especial",
+    "diretor": "special one"
+},
+{
+    "_id": 2,
+    "nome": "sbd",
+    "departamento": "sciencia",
+    "diretor": "Joaninha",
+},
+{
+    "_id": 3,
+    "nome": "este",
+    "departamento": "sciencia",
+    "diretor": "Joaninha",
+},
+{
+    "_id": 4,
+    "nome": "zero",
+    "departamento": "nenhum",
+    "diretor": "Joaninha",
+},
+{
+    "_id": 5,
+    "nome": "sbd2",
+    "departamento": "religioso",
+    "diretor": "Joaninha",
+}]
+);
+
+
+
+//////////////////////////////////////////////////////
+n fiz o resto lololololol
+
+db.createCollection("students", {
+    validator: {
+       $jsonSchema: {
+          bsonType: "object",
+          title: "Student Object Validation",
+          required: [ "address", "major", "name", "year" ],
+          properties: {
+             name: {
+                bsonType: "string",
+                description: "'name' must be a string and is required"
+             },
+             year: {
+                bsonType: "int",
+                minimum: 2017,
+                maximum: 3017,
+                description: "'year' must be an integer in [ 2017, 3017 ] and is required"
+             },
+             gpa: {
+                bsonType: [ "double" ],
+                description: "'gpa' must be a double if the field exists"
+             }
+          }
+       }
+    }
+ } ) 

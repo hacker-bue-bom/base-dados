@@ -1,0 +1,222 @@
+use clube_de_video;
+
+db.cliente.insertMany([
+    {
+        "_id": 1,
+        "nome": "nick",
+        "morada": "Av da avo",
+        "telemphone": 154863324
+    },
+    {
+        "_id": 2,
+        "nome": "tiago",
+        "morada": "Av do cao",
+        "telemphone": 151231234
+    },
+    {
+        "_id": 3,
+        "nome": "joana",
+        "morada": "Av da tia",
+        "telemphone": 567357324
+    },
+    {
+        "_id": 4,
+        "nome": "joao",
+        "morada": "Av da frigorifico",
+        "telemphone": 548695674
+    },
+    {
+        "_id": 5,
+        "nome": "silvia",
+        "morada": "Rua dos desgracados",
+        "telemphone": 2565463324
+    },
+])
+
+db.video.insertMany([
+    {
+        "_id": 1,
+        "titulo": "chucky",
+        "genero": "funny",
+        "duracao": 120,
+        "empresa_de_distribuicao": "AFA"
+    },
+    {
+        "_id": 2,
+        "titulo": "cheese",
+        "genero": "horror",
+        "duracao": 125,
+        "empresa_de_distribuicao": "AFIC"
+    },
+    {
+        "_id": 3,
+        "titulo": "joan of arc",
+        "genero": "fun",
+        "duracao": 60,
+        "empresa_de_distribuicao": "AAAH"
+    },
+    {
+        "_id": 4,
+        "titulo": "300",
+        "genero": "gay",
+        "duracao": 180,
+        "empresa_de_distribuicao": "N sei"
+    },
+    {
+        "_id": 5,
+        "titulo": "batman",
+        "genero": "overrated",
+        "duracao": 160,
+        "empresa_de_distribuicao": "aqueles gajos"
+    },
+])
+
+db.aluguer.insertMany([
+    {
+        "_id": 1,
+        "video_id": 2,
+        "cliente_id": 2,
+        "data_entrada": 120,
+        "data_saida": "AFA"
+    },
+    {
+        "_id": 2,
+        "video_id": 4,
+        "cliente_id": 5,
+        "data_entrada": 125,
+        "data_saida": "AFIC"
+    },
+    {
+        "_id": 3,
+        "video_id": 2,
+        "cliente_id": 5,
+        "data_entrada": 60,
+        "data_saida": "AAAH"
+    },
+    {
+        "_id": 4,
+        "video_id": 3,
+        "cliente_id": 3,
+        "data_entrada": 180,
+        "data_saida": "N sei"
+    },
+    {
+        "_id": 5,
+        "video_id": 1,
+        "cliente_id": 3,
+        "data_entrada": 160,
+        "data_saida": "aqueles gajos"
+    },
+])
+
+
+
+db.aluguer.aggregate([
+    {$lookout: {from: "cliente",
+        localField: "cliente_id",
+        foreingField: "_id",
+        as: "cliente:"
+        },
+        {from: "video",
+        localField: "video_id",
+        foreingField: "_id",
+        as: "video:"
+        }
+    }
+]) 
+
+
+
+
+////////////////////////////////////////////// incomplete
+
+use pastelaria;
+
+db.cliente.insertMany([
+    {
+        "_id": 1,
+        "nome": "nick",
+        "morada": "Av da avo",
+        "telemphone": 154863324,
+        "contribuinte": 54636274
+    },
+    {
+        "_id": 2,
+        "nome": "tiago",
+        "morada": "Av do cao",
+        "telemphone": 151231234,
+        "contribuinte": 3626356246
+    },
+    {
+        "_id": 3,
+        "nome": "joana",
+        "morada": "Av da tia",
+        "telemphone": 567357324,
+        "contribuinte": 23525235 
+    },
+    {
+        "_id": 4,
+        "nome": "joao",
+        "morada": "Av da frigorifico",
+        "telemphone": 548695674,
+        "contribuinte": 235435245
+    },
+    {
+        "_id": 5,
+        "nome": "silvia",
+        "morada": "Rua dos desgracados",
+        "telemphone": 2565463324,
+        "contribuinte": 234234677
+    },
+])
+
+db.encomenda.insertMany([
+    {
+        "_id": 1,
+        "data": 120,
+        "local": "online",
+        "cliente_id": 4,
+        "receitas": [{"receita_id":3, "qtd_enc": 10}]
+    },
+    {
+        "_id": 2,
+        "data": 125,
+        "local": "AFIC",
+        "cliente_id": 2,
+        "receitas": [{"receita_id":3, "qtd_enc": 120}]
+    },
+    {
+        "_id": 3,
+        "data": 60,
+        "local": "AAAH",
+        "cliente_id": 5,
+        "receitas": [{"receita_id":1, "qtd_enc": 103}]
+    },
+    {
+        "_id": 4,
+        "data": 180,
+        "local": "N sei",
+        "cliente_id": 1,
+        "receitas": [{"receita_id":2, "qtd_enc": 101}]
+    },
+    {
+        "_id": 5,
+        "data": 160,
+        "local": "aqueles gajos",
+        "cliente_id": 4,
+        "receitas": [{"receita_id":5, "qtd_enc": 120}]
+    },
+])
+///incomplete from here on, but its basically done
+ingredientes
+{
+    "_id":4,
+    "nome": "Farinha",
+    "unidade": "g",
+    "stock": 1555
+}
+
+receitas
+{
+    
+}

@@ -1,0 +1,5 @@
+db.samples_pokemon.updateOne({"id": 1}, {$push : {"weaknesses": "water"}})
+ db.samples_pokemon.updateOne({"id": 1}, {$addToSet : {"weaknesses": "farts"}})  //same thing but it verifies if it already exists before inserting
+
+db.samples_pokemon.updateOne({"id": 1}, {$pull : {"weaknesses": "water"}})	//oposite of push (it deletes the thing)
+ db.samples_pokemon.updateOne({"id": 1}, {$push : {"weaknesses": { $each: ["water", "farts"]}})

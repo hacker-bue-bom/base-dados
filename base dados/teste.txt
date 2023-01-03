@@ -1,0 +1,75 @@
+4 colecções: 
+	-normal ()
+	-capped (mantém ordem de inserção e actualização dos documentos. Quando cheia, os documentos antigos são substituídos)
+	-views (apenas leitura para colecções ou vistas já existentes)
+	-time series (Guarda sequências de medidas de forma eficiente durante um período de tempo)
+
+Um documento só pode ter no máximo 16 megabytes.
+
+É preservada a ordem dos campos na altura das operações de escrita 
+excepto em dois casos:
+■ O campo _id é sempre o primeiro do documento.
+■ A mudança dos nomes dos campos pode resultar na reordenação dos campos no 
+documento
+
+campo _id pode ser:
+■ Um ObjectId.
+■ Um número natural.
+■ Incrementador de números.
+
+inserir documentos:
+insert
+insertone
+insertmany
+
+Para criar uma colecção
+■ db.newCollection.insertOne( { x: 1 } )
+■ db.newCollection.createIndex( { y: 1 } )
+■ db.createCollection("people")
+
+Para apagar uma base de dados
+■ db.dropDatabase()
+
+Seleccionar todos os documentos de uma colecção:
+■ db.collection.find({})
+■ db.collection.find()
+
+find Com condições OR
+■ db.products.find( { $or: [ { name: "colgate" }, { price: { $lt: 40 } } ] } )
+
+Com condições AND e OR
+■ db.products.find( {
+ status: "in stock", $or: [ { price: { $lt: 50 } }, { name: /^c/ } ]
+} )
+
+Quatro comandos para modificar documentos numa colecção:
+■ db.collection.updateOne()
+■ db.collection.updateMany()
+■ db.collection.update()
+■ db.collection.replaceOne()
+
+Três comandos para remover documentos numa colecção:
+■ db.collection.deleteOne()
+■ db.collection.deleteMany()
+■ db.collection.remove()
+
+Comando remove()
+■ db.collection.remove( <query>, <justOne>)
+○ Remove um único documento ou todos os documentos que satisfazem 
+uma determinada expressão.
+○ Argumento justOne para definir se é para apagar apenas um (true) ou 
+todos os documentos, por defeito é false.
+
+---------------------------
+
+A validação ocorre apenas durante updates e inserts. Documentos já existentes não são validados até serem modificados. Não é possível especificar uma validação para colecções das bases de dados admin, local e config.
+
+Opção validationLevel:
+"off"
+"strict" (default)
+"moderate" - Apenas aplica validação em documentos válidos existentes.
+
+Opção validationAction:
+"error" (default)
+"warn" - just a warning
+

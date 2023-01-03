@@ -1,0 +1,78 @@
+use VideoMovies;
+
+//1
+db.video_movieDetails.aggregate([
+    {$match: {"year" : 2000}},
+    {$unwind: "$countries"}
+])
+
+//2
+db.video_movieDetails.aggregate([
+    {$match: {"genres" : "Comedy"}},
+    {$count: "totes: " }
+]) 
+
+//3
+db.video_movieDetails.aggregate([
+    {$match: {"actor" : "Javier Bardem"}},
+    {$count: "totes: "}
+])
+
+//4
+db.video_movieDetails.aggregate([
+    {$match: {"director":"Louis C.K."}},
+    {$group: {
+        _id: null,
+    "totalNominations": {$sum: "$awards.nominations"}
+    }}
+])
+
+//5
+db.video_movieDetails.aggregate([
+    {$match: {"director":"Louis C.K."}},
+    {$group: {
+        _id: null,
+        "filmes": {$push: "$titulo"}
+        }
+    }
+])
+
+//6
+db.video_movieDetails.aggregate([
+    {$group:
+        {
+            _id: null,
+            "media": { $avg: "$runtime" }
+        }
+    }
+])
+
+//7
+db.video_movieDetails.aggregate([
+    {$match: {$or:[{"imdb.rating":{$gt:7}},
+    {"tomato.rating": {$gt:7}}]}},
+    {$group: { _id:null, totalWins: {$sum:"$awards.wins"}}}
+])
+
+
+//8
+db.video_movieDetails.aggregate([
+    {$match: {"year" : 2000}},
+    {$unwind: "$countries"},
+    {$group:{_id: "$countries"}}
+])
+
+
+//9 
+db.video_movieDetails.aggregate([
+    {$match: {"titulo" : "Once Upon a Time in the West"}},
+    {$project:{titulo:1, year:1, price: {$literal:30}}}
+])
+
+//10
+db.video_movieDetails.aggregate([
+    {$match: {"year" : 2000}},
+    {$unwind: "$countries"},
+    {$group:{_id: "$countries"}},
+    {$sort : { _id : 1} }
+])
